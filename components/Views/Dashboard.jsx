@@ -47,16 +47,6 @@ const Dashboard = () => {
     fetchUserDetails();
   }, [token]);
   return (
-    // <SafeAreaView style={styles.parent}>
-    //   {userData.map((data) => {
-    //     <View>
-    //       <Text>{data.username}</Text>
-    //       <Text>{data.gender}</Text>
-    //       <Text>{data.dob}</Text>
-    //       <Text>{data.credits}</Text>
-    //     </View>;
-    //   })}
-    // </SafeAreaView>
     <SafeAreaView style={styles.parent}>
       {userData ? (
         <View>
