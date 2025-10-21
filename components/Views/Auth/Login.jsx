@@ -60,6 +60,15 @@ export default function Login({ navigation }) {
             <Text style={styles.btntxt}>Login</Text>
           </TouchableOpacity>
         </View>
+        <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+          Don't have an account?
+        </Text>
+        <TouchableOpacity
+          style={{ color: "#113F67" }}
+          onPress={() => navigation.navigate("Register")}
+        >
+          <Text>Register</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
