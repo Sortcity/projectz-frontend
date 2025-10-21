@@ -2,14 +2,33 @@ import mainStyles from "@/styles/mainStyles";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Dashboard = () => {
+const Dashboard = ({ navigation }) => {
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState(null);
 
   const styles = mainStyles();
+
+  const handleLogout = async () => {
+    try {
+      await SecureStore.deleteItemAsync("jwt");
+      setUserData(null);
+      setToken("");
+      alert("Logout successful!");
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Login" }],
+      });
+
+      console.log("Logout successful");
+    } catch (error) {
+      console.error(error);
+      alert("Logout failed due to some reason!");
+    }
+  };
+
   useEffect(() => {
     const loadToken = async () => {
       const storedToken = await SecureStore.getItemAsync("jwt");
@@ -48,6 +67,30 @@ const Dashboard = () => {
   }, [token]);
   return (
     <SafeAreaView style={styles.parent}>
+      <View
+        style={{
+          width: "100%",
+          height: 30,
+          backgroundColor: "#16476A",
+          alignItems: "flex-end",
+        }}
+      >
+        <TouchableOpacity style={{ color: "#113F67" }} onPress={handleLogout}>
+          <Text
+            style={{
+              color: "white",
+              borderRadius: 8,
+              backgroundColor: "grey",
+              padding: 2,
+              margin: 2,
+              borderWidth: 1,
+              width: 55,
+            }}
+          >
+            Logout
+          </Text>
+        </TouchableOpacity>
+      </View>
       {userData ? (
         <View>
           <Text>Username: {userData.body.username}</Text>
