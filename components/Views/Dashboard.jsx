@@ -3,6 +3,7 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import React, { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Dashboard = () => {
   const [token, setToken] = useState("");
@@ -37,7 +38,7 @@ const Dashboard = () => {
           setUserData(user);
         }
         console.log("Fetched user details:", user);
-        return userData;
+        return user;
       } catch (error) {
         console.error("Error fetching user details:", error);
         return null;
@@ -46,9 +47,28 @@ const Dashboard = () => {
     fetchUserDetails();
   }, [token]);
   return (
-    <View style={styles.parent}>
-      <Text>{JSON.stringify(userData)}</Text>
-    </View>
+    // <SafeAreaView style={styles.parent}>
+    //   {userData.map((data) => {
+    //     <View>
+    //       <Text>{data.username}</Text>
+    //       <Text>{data.gender}</Text>
+    //       <Text>{data.dob}</Text>
+    //       <Text>{data.credits}</Text>
+    //     </View>;
+    //   })}
+    // </SafeAreaView>
+    <SafeAreaView style={styles.parent}>
+      {userData ? (
+        <View>
+          <Text>Username: {userData.body.username}</Text>
+          <Text>Gender: {userData.body.gender}</Text>
+          <Text>Date of Birth: {userData.body.dob}</Text>
+          <Text>Credits: {userData.body.credits}</Text>
+        </View>
+      ) : (
+        <Text>Loading user details...</Text>
+      )}
+    </SafeAreaView>
   );
 };
 
