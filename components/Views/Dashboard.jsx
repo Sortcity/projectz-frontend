@@ -2,10 +2,10 @@ import mainStyles from "@/styles/mainStyles";
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Dashboard = ({ navigation }) => {
+const Dashboard = ({ navigation, route }) => {
   const [token, setToken] = useState("");
   const [userData, setUserData] = useState(null);
 
@@ -13,7 +13,10 @@ const Dashboard = ({ navigation }) => {
 
   const handleLogout = async () => {
     try {
-      await SecureStore.deleteItemAsync("jwt");
+      if (!Platform.OS == "web") {
+        await SecureStore.deleteItemAsync("jwt");
+      }
+
       setUserData(null);
       setToken("");
       alert("Logout successful!");
@@ -30,13 +33,19 @@ const Dashboard = ({ navigation }) => {
   };
 
   useEffect(() => {
-    const loadToken = async () => {
-      const storedToken = await SecureStore.getItemAsync("jwt");
-      if (storedToken) {
-        setToken(storedToken);
-      }
-    };
-    loadToken();
+    if (!Platform.OS == "web") {
+      const loadToken = async () => {
+        const storedToken = await SecureStore.getItemAsync("jwt");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      };
+      loadToken();
+    } else {
+      const { webToken } = route.params;
+      console.log("The webtoken:", webToken);
+      setToken(webToken);
+    }
   }, []);
 
   useEffect(() => {
@@ -44,7 +53,7 @@ const Dashboard = ({ navigation }) => {
       if (!token) return;
       try {
         const response = await axios.get(
-          "http://192.168.1.13:8080/userDetails",
+          "http://192.168.1.7:8080/userDetails",
           {
             headers: {
               Authorization: `Bearer ${token}`,
