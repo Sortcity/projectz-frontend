@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 
 import mainStyles from "@/styles/mainStyles";
 import * as SecureStore from "expo-secure-store";
@@ -11,6 +11,9 @@ import InputForm from "./InputForm";
 export default function Login({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [acessToken, setAccessToken] = useState("");
+
+  const userAgent = Platform.OS === "ios" || "android" ? "mobile" : "web";
 
   const handleLogin = async () => {
     try {
@@ -18,17 +21,25 @@ export default function Login({ navigation }) {
         alert("Please fill in all the fields.");
       }
       const response = await axios.post(
-        "http://192.168.1.13:8080/api/auth/login",
+        "http://192.168.1.7:8080/api/auth/login",
         {
           username,
           password,
+        },
+        {
+          headers: {
+            "X-Client-Platform": userAgent,
+            "Content-Type": "application/json",
+          },
         }
       );
 
       const token = response.data.token;
-      await SecureStore.setItemAsync("jwt", token);
+      if (Platform.OS == "web") {
+        setAccessToken(token);
+      } else await SecureStore.setItemAsync("jwt", token);
       console.log("Token saved securely");
-      navigation.replace("Dashboard");
+      navigation.replace("Dashboard", { webToken: token });
     } catch (error) {
       console.error(error);
     }
