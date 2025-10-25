@@ -53,7 +53,7 @@ const Dashboard = ({ navigation, route }) => {
       if (!token) return;
       try {
         const response = await axios.get(
-          "http://sortcity.ap-south-1.elasticbeanstalk.com:5000/userDetails",
+          "https://sortcity.ap-south-1.elasticbeanstalk.com:443/userDetails",
           {
             headers: {
               Authorization: `Bearer ${token}`,
