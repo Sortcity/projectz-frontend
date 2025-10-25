@@ -19,7 +19,7 @@ export default function Register({ navigation }) {
         alert("Please fill in all the fields.");
       }
       const response = await axios.post(
-        "http://192.168.1.13:8080/api/auth/registerUser",
+        "http://sortcity.ap-south-1.elasticbeanstalk.com:5000/api/auth/registerUser",
         {
           email,
           username,

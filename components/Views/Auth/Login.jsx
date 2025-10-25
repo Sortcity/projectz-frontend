@@ -21,7 +21,7 @@ export default function Login({ navigation }) {
         alert("Please fill in all the fields.");
       }
       const response = await axios.post(
-        "http://192.168.1.7:8080/api/auth/login",
+        "http://sortcity.ap-south-1.elasticbeanstalk.com:5000/api/auth/login",
         {
           username,
           password,
