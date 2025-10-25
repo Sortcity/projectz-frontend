@@ -43,7 +43,6 @@ const Dashboard = ({ navigation, route }) => {
       loadToken();
     } else {
       const { webToken } = route.params;
-      console.log("The webtoken:", webToken);
       setToken(webToken);
     }
   }, []);
@@ -65,7 +64,6 @@ const Dashboard = ({ navigation, route }) => {
         if (user) {
           setUserData(user);
         }
-        console.log("Fetched user details:", user);
         return user;
       } catch (error) {
         console.error("Error fetching user details:", error);
