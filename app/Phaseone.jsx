@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Phaseone = () => {
+const Phaseone = ({ navigation }) => {
   const { username } = useLocalSearchParams();
   // const [username, setUsername] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
