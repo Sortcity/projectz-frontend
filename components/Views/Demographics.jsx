@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Demographics = ({ route }) => {
+const Demographics = ({ navigation, route }) => {
   const { username } = route.params;
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
