@@ -4,6 +4,7 @@ import Demographics from "@/components/Views/Demographics";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
 import Login from "../../components/Views/Auth/Login";
+import Phaseone from "../Phaseone";
 
 export default function HomeScreen() {
   const Stack = createNativeStackNavigator();
@@ -13,6 +14,7 @@ export default function HomeScreen() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="Phaseone" component={Phaseone} />
       <Stack.Screen name="Demographics" component={Demographics} />
     </Stack.Navigator>
   );
