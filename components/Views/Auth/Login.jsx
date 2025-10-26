@@ -37,7 +37,10 @@ export default function Login({ navigation }) {
       const token = response.data.token;
       if (Platform.OS == "web") {
         setAccessToken(token);
-      } else await SecureStore.setItemAsync("jwt", token);
+      } else {
+        await SecureStore.setItemAsync("jwt", token);
+        await SecureStore.setItemAsync("refresh", response.data.refreshToken);
+      }
       console.log("Token saved securely");
       navigation.replace("Dashboard", { webToken: token });
     } catch (error) {
