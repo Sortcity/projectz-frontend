@@ -20,9 +20,11 @@ const Phaseone = () => {
       console.log(username, verificationCode, password1, password);
       if (!verificationCode || !username || !password1 || !password) {
         alert("Please fill in all the fields.");
+        return;
       }
       if (password1 != password) {
         alert("Passwords do not match.");
+        return;
       }
       const response = await axios.post(
         "https://sortcity.ap-south-1.elasticbeanstalk.com:443/api/auth/verify",
