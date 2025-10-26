@@ -18,6 +18,7 @@ const Demographics = () => {
     try {
       if (!dob || !username || !gender) {
         alert("Please fill in all the fields.");
+        return;
       }
 
       const response = await axios.post(
