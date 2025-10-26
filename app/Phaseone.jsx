@@ -15,8 +15,6 @@ const Phaseone = () => {
   const [password1, setPassword1] = useState("");
   const [password, setPassword] = useState("");
 
-  const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
   const handleVerify = async () => {
     try {
       console.log(username, verificationCode, password1, password);
@@ -41,9 +39,8 @@ const Phaseone = () => {
         }
       );
       alert("User Verified Successfully. Please Login.");
-      await delay(3000);
       router.replace({
-        pathname: "/demographics",
+        pathname: "/Demographics",
         params: { username: username },
       });
     } catch (error) {
