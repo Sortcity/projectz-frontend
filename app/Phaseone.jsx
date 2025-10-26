@@ -2,13 +2,14 @@ import AuthStyles from "@/components/Views/Auth/AuthStyles";
 import InputForm from "@/components/Views/Auth/InputForm";
 import mainStyles from "@/styles/mainStyles";
 import axios from "axios";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Phaseone = ({ navigation }) => {
+const Phaseone = () => {
   const { username } = useLocalSearchParams();
+  const router = useRouter();
   // const [username, setUsername] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [password1, setPassword1] = useState("");
@@ -41,7 +42,10 @@ const Phaseone = ({ navigation }) => {
       );
       alert("User Verified Successfully. Please Login.");
       await delay(3000);
-      navigation.replace("Demographics", { username: username });
+      router.replace({
+        pathname: "/demographics",
+        params: { username: username },
+      });
     } catch (error) {
       console.error(error);
     }
