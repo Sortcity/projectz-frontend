@@ -3,12 +3,14 @@ import InputForm from "@/components/Views/Auth/InputForm";
 import mainStyles from "@/styles/mainStyles";
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Demographics = ({ navigation, route }) => {
-  const { username } = route.params;
+const Demographics = () => {
+  const router = useRouter();
+  const { username } = useLocalSearchParams();
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
 
@@ -36,7 +38,9 @@ const Demographics = ({ navigation, route }) => {
       );
       alert("User Updated Successfully. Please Login.");
       await delay(3000);
-      navigation.replace("Login");
+      router.replace({
+        pathname: "/",
+      });
     } catch (error) {
       console.error(error);
     }
