@@ -1,7 +1,7 @@
 import Background from "@/components/Background";
 import mainStyles from "@/styles/mainStyles";
 import axios from "axios";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import React, { useEffect, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [token, setToken] = useState("");
   const { accesstoken } = useLocalSearchParams();
   const [userData, setUserData] = useState(null);
-
+  const router = useRouter();
   const styles = mainStyles();
 
   const handleLogout = async () => {
@@ -23,10 +23,7 @@ const Dashboard = () => {
       setUserData(null);
       setToken("");
       alert("Logout successful!");
-      navigation.reset({
-        index: 0,
-        routes: [{ name: "Login" }],
-      });
+      router.replace("/Views/Auth/Login");
 
       console.log("Logout successful");
     } catch (error) {

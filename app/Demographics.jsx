@@ -1,5 +1,6 @@
 import AuthStyles from "@/app/Views/Auth/AuthStyles";
 import InputForm from "@/app/Views/Auth/InputForm";
+import Background from "@/components/Background";
 import mainStyles from "@/styles/mainStyles";
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";
@@ -47,7 +48,13 @@ const Demographics = () => {
   const styles = AuthStyles();
   const mainStyle = mainStyles();
   return (
-    <SafeAreaView style={mainStyle.parent}>
+    <SafeAreaView
+      style={[
+        mainStyle.parent,
+        { justifyContent: "center", alignItems: "center" },
+      ]}
+    >
+      <Background />
       <View style={styles.main}>
         <View>
           <View style={styles.formcon}>
@@ -68,11 +75,11 @@ const Demographics = () => {
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
-            <Text>Select Gender</Text>
+            <Text style={styles.title}>Select Gender</Text>
             <Picker
               selectedValue={gender}
               onValueChange={(itemValue) => setGender(itemValue)}
-              style={{ height: 30, width: 100 }}
+              style={styles.form}
             >
               <Picker.Item label="Select..." value="" />
               <Picker.Item label="Male" value="MALE" />
