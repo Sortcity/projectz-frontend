@@ -3,7 +3,6 @@ export default function mainStyles() {
   const styles = StyleSheet.create({
     parent: {
       flex: 1,
-      backgroundColor: "#FCF9EA",
     },
     titleContainer: {
       flexDirection: "row",
