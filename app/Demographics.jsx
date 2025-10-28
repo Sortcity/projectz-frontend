@@ -1,5 +1,5 @@
-import AuthStyles from "@/components/Views/Auth/AuthStyles";
-import InputForm from "@/components/Views/Auth/InputForm";
+import AuthStyles from "@/app/Views/Auth/AuthStyles";
+import InputForm from "@/app/Views/Auth/InputForm";
 import mainStyles from "@/styles/mainStyles";
 import { Picker } from "@react-native-picker/picker";
 import axios from "axios";

@@ -1,19 +1,31 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 
+import Background from "@/components/Background";
 import mainStyles from "@/styles/mainStyles";
+import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthStyles from "./AuthStyles";
 import InputForm from "./InputForm";
 
-export default function Login({ navigation }) {
+export default function Login() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [acessToken, setAccessToken] = useState("");
+  const [login, setLogin] = useState(false);
 
   const userAgent = Platform.OS === "ios" || "android" ? "mobile" : "web";
+
+  useEffect(() => {
+    if (login == true) {
+      router.replace({
+        pathname: "/Views/Dashboard",
+      });
+    }
+  }, []);
 
   const handleLogin = async () => {
     try {
@@ -34,15 +46,20 @@ export default function Login({ navigation }) {
         }
       );
 
-      const token = response.data.token;
+      const accesstoken = response.data.token;
       if (Platform.OS == "web") {
-        setAccessToken(token);
+        setAccessToken(accesstoken);
       } else {
-        await SecureStore.setItemAsync("jwt", token);
+        await SecureStore.setItemAsync("jwt", accesstoken);
         await SecureStore.setItemAsync("refresh", response.data.refreshToken);
       }
       console.log("Token saved securely");
-      navigation.replace("Dashboard", { webToken: token });
+      setLogin(true);
+      // navigation.replace("Dashboard", { webToken: token });
+      router.replace({
+        pathname: "/Views/Dashboard",
+        params: { accesstoken },
+      });
     } catch (error) {
       console.error(error);
     }
@@ -50,7 +67,8 @@ export default function Login({ navigation }) {
   const styles = AuthStyles();
   const mainStyle = mainStyles();
   return (
-    <SafeAreaView style={mainStyle.parent}>
+    <SafeAreaView style={[mainStyle.parent, { flex: 1, position: "relative" }]}>
+      <Background />
       <View style={styles.main}>
         <View>
           <InputForm
@@ -79,7 +97,7 @@ export default function Login({ navigation }) {
         </Text>
         <TouchableOpacity
           style={{ color: "#113F67" }}
-          onPress={() => navigation.navigate("Register")}
+          onPress={() => router.push("/Views/Auth/Register")}
         >
           <Text>Register</Text>
         </TouchableOpacity>

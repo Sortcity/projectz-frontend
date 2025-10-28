@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
+import Background from "@/components/Background";
 import mainStyles from "@/styles/mainStyles";
+import { useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import AuthStyles from "./AuthStyles";
 import InputForm from "./InputForm";
@@ -12,6 +14,7 @@ export default function Register({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  const router = useRouter();
 
   const handleRegister = async () => {
     try {
@@ -37,7 +40,8 @@ export default function Register({ navigation }) {
   const styles = AuthStyles();
   const mainStyle = mainStyles();
   return (
-    <SafeAreaView style={mainStyle.parent}>
+    <SafeAreaView style={[mainStyle.parent, { flex: 1, position: "relative" }]}>
+      <Background />
       <View style={styles.main}>
         <View>
           <InputForm
@@ -68,6 +72,15 @@ export default function Register({ navigation }) {
             <Text style={styles.btntxt}>Register</Text>
           </TouchableOpacity>
         </View>
+        <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+          Already have an account?
+        </Text>
+        <TouchableOpacity
+          style={{ color: "#113F67" }}
+          onPress={() => router.push("/Views/Auth/Login")}
+        >
+          <Text>Login</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
