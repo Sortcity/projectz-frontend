@@ -1,5 +1,6 @@
 import AuthStyles from "@/app/Views/Auth/AuthStyles";
 import InputForm from "@/app/Views/Auth/InputForm";
+import Background from "@/components/Background";
 import mainStyles from "@/styles/mainStyles";
 import axios from "axios";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -52,7 +53,13 @@ const Phaseone = () => {
   const styles = AuthStyles();
   const mainStyle = mainStyles();
   return (
-    <SafeAreaView style={mainStyle.parent}>
+    <SafeAreaView
+      style={[
+        mainStyle.parent,
+        { justifyContent: "center", alignItems: "center" },
+      ]}
+    >
+      <Background />
       <View style={styles.main}>
         <View>
           <View style={styles.formcon}>
