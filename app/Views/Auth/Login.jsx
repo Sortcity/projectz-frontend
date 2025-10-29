@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 
 import Background from "@/components/Background";
+import { UserContext } from "@/scripts/UserContext";
 import mainStyles from "@/styles/mainStyles";
 import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
@@ -14,18 +15,17 @@ export default function Login() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [acessToken, setAccessToken] = useState("");
-  const [login, setLogin] = useState(false);
+  // const [acessToken, setAccessToken] = useState("");
+  const { token, setToken } = useContext(UserContext);
+  const { login, setLogin } = useContext(UserContext);
 
   const userAgent = Platform.OS === "ios" || "android" ? "mobile" : "web";
 
   useEffect(() => {
-    if (login == true) {
-      router.replace({
-        pathname: "/Views/Dashboard",
-      });
+    if (login) {
+      router.replace("/Views/Dashboard");
     }
-  }, []);
+  }, [login]);
 
   const handleLogin = async () => {
     try {
@@ -48,17 +48,15 @@ export default function Login() {
 
       const accesstoken = response.data.token;
       if (Platform.OS == "web") {
-        setAccessToken(accesstoken);
+        setToken(accesstoken);
       } else {
         await SecureStore.setItemAsync("jwt", accesstoken);
         await SecureStore.setItemAsync("refresh", response.data.refreshToken);
       }
-      console.log("Token saved securely");
+      console.log("Auth Success.");
       setLogin(true);
-      // navigation.replace("Dashboard", { webToken: token });
       router.replace({
         pathname: "/Views/Dashboard",
-        params: { accesstoken },
       });
     } catch (error) {
       console.error(error);
@@ -70,37 +68,49 @@ export default function Login() {
     <SafeAreaView style={[mainStyle.parent, { flex: 1, position: "relative" }]}>
       <Background />
       <View style={styles.main}>
-        <View>
-          <InputForm
-            FormName={"Username"}
-            AutoComplete={"username"}
-            Placeholder={"Enter your username..."}
-            value={username}
-            setValue={setUsername}
-          />
-          <InputForm
-            FormName={"Password"}
-            SecureTextEntry={true}
-            AutoComplete={"password"}
-            Placeholder={"Enter your password..."}
-            value={password}
-            setValue={setPassword}
-          />
-        </View>
-        <View>
-          <TouchableOpacity style={styles.btn} onPress={handleLogin}>
-            <Text style={styles.btntxt}>Login</Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={{ fontSize: 24, fontWeight: "bold" }}>
-          Don't have an account?
-        </Text>
-        <TouchableOpacity
-          style={{ color: "#113F67" }}
-          onPress={() => router.push("/Views/Auth/Register")}
+        <View
+          style={{
+            // backgroundColor: "white",
+
+            position: "absolute",
+            height: "35%",
+            borderRadius: 20,
+            backgroundColor: "white",
+            zIndex: -1,
+          }}
         >
-          <Text>Register</Text>
-        </TouchableOpacity>
+          <View>
+            <InputForm
+              FormName={"Username"}
+              AutoComplete={"username"}
+              Placeholder={"Enter your username..."}
+              value={username}
+              setValue={setUsername}
+            />
+            <InputForm
+              FormName={"Password"}
+              SecureTextEntry={true}
+              AutoComplete={"password"}
+              Placeholder={"Enter your password..."}
+              value={password}
+              setValue={setPassword}
+            />
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity style={styles.btn} onPress={handleLogin}>
+              <Text style={styles.btntxt}>Login</Text>
+            </TouchableOpacity>
+            <Text style={{ fontSize: 24, fontWeight: "bold" }}>
+              Don't have an account?
+            </Text>
+            <TouchableOpacity
+              style={{ color: "#113F67" }}
+              onPress={() => router.push("/Views/Auth/Register")}
+            >
+              <Text>Register</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );

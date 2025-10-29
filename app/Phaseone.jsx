@@ -18,7 +18,6 @@ const Phaseone = () => {
 
   const handleVerify = async () => {
     try {
-      console.log(username, verificationCode, password1, password);
       if (!verificationCode || !username || !password1 || !password) {
         alert("Please fill in all the fields.");
         return;
@@ -41,7 +40,7 @@ const Phaseone = () => {
           },
         }
       );
-      alert("User Verified Successfully. Please Login.");
+      alert("User Verified Successfully. Please update the information.");
       router.replace({
         pathname: "/Demographics",
         params: { username: username },
