@@ -21,7 +21,7 @@ export default function AuthStyles() {
       margin: 10,
       width: 250,
       height: 40,
-      backgroundColor: "#EEEEEE",
+      backgroundColor: "#e5fefcff",
       borderRadius: 10,
       padding: 10,
     },
