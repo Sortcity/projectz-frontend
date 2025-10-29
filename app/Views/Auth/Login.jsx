@@ -68,17 +68,7 @@ export default function Login() {
     <SafeAreaView style={[mainStyle.parent, { flex: 1, position: "relative" }]}>
       <Background />
       <View style={styles.main}>
-        <View
-          style={{
-            // backgroundColor: "white",
-
-            position: "absolute",
-            height: "35%",
-            borderRadius: 20,
-            backgroundColor: "white",
-            zIndex: -1,
-          }}
-        >
+        <View>
           <View>
             <InputForm
               FormName={"Username"}
