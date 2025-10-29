@@ -1,18 +1,19 @@
 import Background from "@/components/Background";
+import { UserContext } from "@/scripts/UserContext";
 import mainStyles from "@/styles/mainStyles";
 import axios from "axios";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Dashboard = () => {
-  const [token, setToken] = useState("");
-  const { accesstoken } = useLocalSearchParams();
+  const { token, setToken } = useContext(UserContext);
   const [userData, setUserData] = useState(null);
   const router = useRouter();
   const styles = mainStyles();
+  const { login, setLogin } = useContext(UserContext);
 
   const handleLogout = async () => {
     try {
@@ -22,6 +23,7 @@ const Dashboard = () => {
 
       setUserData(null);
       setToken("");
+      setLogin(false);
       alert("Logout successful!");
       router.replace("/Views/Auth/Login");
 
@@ -41,8 +43,6 @@ const Dashboard = () => {
         }
       };
       loadToken();
-    } else {
-      setToken(accesstoken);
     }
   }, []);
 
@@ -71,7 +71,7 @@ const Dashboard = () => {
     };
     fetchUserDetails();
   }, [token]);
-  return (
+  return login ? (
     <View style={{ flex: 1, position: "relative" }}>
       <SafeAreaView
         style={[
@@ -113,6 +113,8 @@ const Dashboard = () => {
         )}
       </SafeAreaView>
     </View>
+  ) : (
+    alert("Restricted access! User not logged in.")
   );
 };
 

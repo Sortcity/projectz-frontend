@@ -103,7 +103,7 @@ export default function Background() {
           height: 350,
           top: "40%",
           left: "60%",
-          animation: "blobMove2 20s ease-in-out infinite",
+          animation: "blobMove2 10s ease-in-out infinite",
         }}
       />
       <View
@@ -114,7 +114,7 @@ export default function Background() {
           height: 450,
           top: "60%",
           left: "20%",
-          animation: "blobMove3 30s ease-in-out infinite",
+          animation: "blobMove3 10s ease-in-out infinite",
         }}
       />
       <View
@@ -125,7 +125,7 @@ export default function Background() {
           height: 300,
           top: "30%",
           left: "70%",
-          animation: "blobMove4 28s ease-in-out infinite",
+          animation: "blobMove4 20s ease-in-out infinite",
         }}
       />
     </View>
