@@ -57,6 +57,10 @@ export default function Login() {
       setLogin(true);
       router.replace("/Dashboard");
     } catch (error) {
+      if (error.response) {
+        alert(error.response.data);
+        console.log("Error response:", error.response.data);
+      } else alert("Login failed. Please try again.");
       console.error(error);
     }
   };
