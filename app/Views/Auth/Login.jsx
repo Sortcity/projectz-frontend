@@ -23,7 +23,7 @@ export default function Login() {
 
   useEffect(() => {
     if (login) {
-      router.replace("/Views/Dashboard");
+      router.replace("/Dashboard");
     }
   }, [login]);
 
@@ -55,9 +55,7 @@ export default function Login() {
       }
       console.log("Auth Success.");
       setLogin(true);
-      router.replace({
-        pathname: "/Views/Dashboard",
-      });
+      router.replace("/Dashboard");
     } catch (error) {
       console.error(error);
     }
