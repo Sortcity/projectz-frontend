@@ -1,18 +1,25 @@
 import carouselData from "@/scripts/carouselData";
 import { Marquee } from "@animatereactnative/marquee";
 import React from "react";
-import {
-  Dimensions,
-  Image,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+
+// const { width } = Dimensions.get("window");
+// const _itemWidth =
+//   Platform.OS == "web" ? Math.min(width * 0.5, 500) : width * 0.62;
 
 const { width } = Dimensions.get("window");
-const _itemWidth =
-  Platform.OS == "web" ? Math.min(width * 0.5, 500) : width * 0.62;
+let _itemWidth;
+
+if (width < 480) {
+  // small screens (phones)
+  _itemWidth = width * 0.9;
+} else if (width < 1024) {
+  // tablets or medium devices
+  _itemWidth = width * 0.6;
+} else {
+  // large screens (desktops)
+  _itemWidth = 500;
+}
 const _itemHeight = _itemWidth * 1.6;
 
 const Slider = () => {
