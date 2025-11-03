@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
     margin: 2,
     borderWidth: 1,
     fontWeight: "bold",
+    userSelect: "none",
+    cursor: "default",
   },
   lgbtn: {
     color: "white",
