@@ -12,13 +12,13 @@ let _itemWidth;
 
 if (width < 480) {
   // small screens (phones)
-  _itemWidth = width * 0.9;
-} else if (width < 1024) {
+  _itemWidth = width * 0.8;
+} else if (width < 1000) {
   // tablets or medium devices
   _itemWidth = width * 0.6;
 } else {
   // large screens (desktops)
-  _itemWidth = 500;
+  _itemWidth = 450;
 }
 const _itemHeight = _itemWidth * 1.6;
 
@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(209, 208, 204, 0.55)",
+    backgroundColor: "rgba(17, 63, 103, 0.05)",
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
   txt: {
-    color: "#113F67",
+    color: "#fff9deff",
     fontWeight: "700",
     fontSize: 18,
     textAlign: "center",
@@ -88,13 +88,14 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(17, 66, 103, 0.05)",
     paddingVertical: 20,
     paddingHorizontal: 10,
   },
   desc: {
-    color: "#fff",
-    fontSize: 24,
+    color: "#fff9deff",
+    fontSize: 20,
     textAlign: "center",
+    fontWeight: "bold",
   },
 });
