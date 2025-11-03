@@ -9,7 +9,7 @@ export default [
     id: 2,
     img: require("../assets/carousel/pod.png"),
     title: "Your Safe-Pod",
-    desc: "Find your support system or create your own using Safe-pod feature.",
+    desc: "Find or create your support system using Safe-pod feature.",
   },
   {
     id: 3,
@@ -27,6 +27,6 @@ export default [
     id: 5,
     img: require("../assets/carousel/exp.png"),
     title: "Habits Experimentation",
-    desc: "Create a new habit or quit an old one. Keep track of your habits.",
+    desc: "Create a new habit or quit an old one.",
   },
 ];
