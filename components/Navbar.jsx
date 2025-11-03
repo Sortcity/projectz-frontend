@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     padding: 2,
     margin: 2,
     borderWidth: 1,
-    width: 55,
+
     fontWeight: "bold",
   },
   itemCon: { justifyContent: "space-between", flexDirection: "row" },

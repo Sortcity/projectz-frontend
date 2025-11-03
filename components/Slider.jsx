@@ -10,12 +10,14 @@ import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 const { width } = Dimensions.get("window");
 let _itemWidth;
 
-if (width < 480) {
+if (width <= 400) {
+  _itemWidth = width * 0.5;
+} else if (width <= 480) {
   // small screens (phones)
-  _itemWidth = width * 0.8;
-} else if (width < 1000) {
-  // tablets or medium devices
   _itemWidth = width * 0.6;
+} else if (width <= 1024) {
+  // tablets or medium devices
+  _itemWidth = width * 0.8;
 } else {
   // large screens (desktops)
   _itemWidth = 450;
@@ -73,13 +75,13 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     right: 0,
-    backgroundColor: "rgba(17, 63, 103, 0.05)",
+    backgroundColor: "rgba(17, 63, 103, 0.1)",
     paddingVertical: 8,
     paddingHorizontal: 12,
   },
   txt: {
     color: "#fff9deff",
-    fontWeight: "700",
+    fontWeight: "bold",
     fontSize: 18,
     textAlign: "center",
   },
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
   },
   desc: {
     color: "#fff9deff",
-    fontSize: 20,
+    fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
   },
