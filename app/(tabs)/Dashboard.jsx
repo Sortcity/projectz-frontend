@@ -10,6 +10,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Dashboard = () => {
+  const accesstoken = sessionStorage.getItem("accesstoken");
   const { token, setToken } = useContext(UserContext);
   const { userData, setUserData } = useContext(UserContext);
 
@@ -29,13 +30,15 @@ const Dashboard = () => {
 
   useEffect(() => {
     const fetchUserDetails = async () => {
-      if (!token) return;
+      if (!token) {
+        setToken(accesstoken);
+      }
       try {
         const response = await axios.get(
           "https://sortcity.ap-south-1.elasticbeanstalk.com:443/userDetails",
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${accesstoken}`,
             },
           }
         );

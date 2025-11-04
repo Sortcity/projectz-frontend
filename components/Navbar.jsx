@@ -25,6 +25,7 @@ export default function Navbar() {
       setUserData(null);
       setToken("");
       setLogin(false);
+      sessionStorage.removeItem("accesstoken");
       alert("Logout successful!");
       router.replace("/Views/Auth/Login");
 

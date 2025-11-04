@@ -17,6 +17,7 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
   useEffect(() => {
     if (typeof document !== "undefined") {
       let viewport = document.querySelector('meta[name="viewport"]');
@@ -36,6 +37,7 @@ export default function RootLayout() {
       }
     }
   }, []);
+
   return (
     <UserProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
