@@ -1,7 +1,8 @@
 import carouselData from "@/scripts/carouselData";
 import { Marquee } from "@animatereactnative/marquee";
+import { Image } from "expo-image";
 import React from "react";
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, StyleSheet, Text, View } from "react-native";
 
 // const { width } = Dimensions.get("window");
 // const _itemWidth =
@@ -27,11 +28,13 @@ const _itemHeight = _itemWidth * 1.6;
 const Slider = () => {
   return (
     <View style={styles.container}>
-      <Marquee spacing={16} speed={0.2}>
+      <Marquee spacing={16} speed={0.4}>
         <View style={styles.mar}>
           {carouselData.map((item, id) => (
             <View key={id} style={styles.imgCon}>
+              {/* <Image source={item.img} style={styles.img} /> */}
               <Image source={item.img} style={styles.img} />
+
               <View style={styles.txtWrap}>
                 <Text style={styles.txt}>{item.title}</Text>
               </View>
