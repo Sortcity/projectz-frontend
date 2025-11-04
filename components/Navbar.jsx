@@ -1,6 +1,7 @@
 import { UserContext } from "@/scripts/UserContext";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import axios from "axios";
 import { useRouter } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import React, { useContext } from "react";
@@ -17,16 +18,26 @@ export default function Navbar() {
   const { token, setToken } = useContext(UserContext);
   const { login, setLogin } = useContext(UserContext);
   const router = useRouter();
+  const accesstoken = sessionStorage.getItem("accesstoken");
   const handleLogout = async () => {
     try {
       if (!Platform.OS == "web") {
         await SecureStore.deleteItemAsync("jwt");
       }
+      const response = await axios.post(
+        "https://sortcity.ap-south-1.elasticbeanstalk.com:443/userLogout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accesstoken}`,
+          },
+        }
+      );
       setUserData(null);
       setToken("");
       setLogin(false);
       sessionStorage.removeItem("accesstoken");
-      alert("Logout successful!");
+      alert(response.data);
       router.replace("/Views/Auth/Login");
 
       console.log("Logout successful");
