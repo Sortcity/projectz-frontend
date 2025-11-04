@@ -49,6 +49,7 @@ export default function Login() {
       const accesstoken = response.data.token;
       if (Platform.OS == "web") {
         setToken(accesstoken);
+        sessionStorage.setItem("accesstoken", accesstoken);
       } else {
         await SecureStore.setItemAsync("jwt", accesstoken);
         await SecureStore.setItemAsync("refresh", response.data.refreshToken);
