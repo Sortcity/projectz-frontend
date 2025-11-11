@@ -64,6 +64,7 @@ const Dashboard = () => {
         <View style={styles.txtWrap}>
           <Text style={styles.txt}>Launching soon!</Text>
         </View>
+
         <ScrollView
           style={{ flex: 1 }}
           contentContainerStyle={styles.scrollCon}
@@ -89,10 +90,9 @@ const styles = StyleSheet.create({
     margin: 20,
     justifyContent: "center",
     alignItems: "center",
-    gap: 20,
   },
   txt: {
-    fontFamily: "Andale Mono, monospace",
+    fontFamily: "Trebuchet MS",
     fontWeight: "bold",
     fontSize: 44,
     color: "#0a2e4dff",

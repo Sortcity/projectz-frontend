@@ -23,17 +23,24 @@ if (width <= 400) {
   // large screens (desktops)
   _itemWidth = 450;
 }
-const _itemHeight = _itemWidth * 1.6;
+const _itemHeight = _itemWidth * 0.8;
 
 const Slider = () => {
   return (
     <View style={styles.container}>
-      <Marquee spacing={16} speed={0.4}>
+      <View style={styles.maintext}>
+        <Text style={styles.txt}>Upcoming Features of the Application:</Text>
+      </View>
+      <Marquee spacing={16} speed={0.6}>
         <View style={styles.mar}>
           {carouselData.map((item, id) => (
             <View key={id} style={styles.imgCon}>
               {/* <Image source={item.img} style={styles.img} /> */}
-              <Image source={item.img} style={styles.img} />
+              <Image
+                source={item.img}
+                style={styles.img}
+                pointerEvents="none"
+              />
 
               <View style={styles.txtWrap}>
                 <Text style={styles.txt}>{item.title}</Text>
@@ -60,6 +67,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   mar: { flexDirection: "row", gap: 16 },
+  maintext: {
+    margin: 16,
+  },
   imgCon: {
     width: _itemWidth,
     height: _itemHeight,
@@ -70,6 +80,7 @@ const styles = StyleSheet.create({
   },
   img: {
     ...StyleSheet.absoluteFillObject,
+    resizeMode: "cover",
     width: "100%",
     height: "100%",
   },
@@ -79,11 +90,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: "rgba(17, 63, 103, 0.1)",
-    paddingVertical: 8,
+    paddingVertical: 4,
     paddingHorizontal: 12,
   },
   txt: {
-    color: "#fff9deff",
+    color: "#15395aff",
     fontWeight: "bold",
     fontSize: 18,
     textAlign: "center",
@@ -98,9 +109,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   desc: {
-    color: "#fff9deff",
+    color: "#ffffffff",
     fontSize: 16,
     textAlign: "center",
     fontWeight: "bold",
+    fontFamily: "Trebuchet MS",
   },
 });
