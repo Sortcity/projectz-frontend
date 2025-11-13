@@ -71,8 +71,8 @@ const Phaseone = () => {
             />
           </View>
           <InputForm
-            FormName={"Passcode"}
-            Placeholder={"Enter your passcode..."}
+            FormName={"Verification Code"}
+            Placeholder={"Enter your code..."}
             value={verificationCode}
             setValue={setVerificationCode}
           />
